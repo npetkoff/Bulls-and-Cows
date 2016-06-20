@@ -1,0 +1,14 @@
+#This program is a guessing game where to user must guess a random 4 digit number
+
+from PA2_Functions import generateSecretNumber, findBulls, findCows 
+print "Bulls and Cows Game"
+secret = generateSecretNumber()
+
+
+guess = raw_input('Enter your first guess:')
+while guess != secret:
+    bulls = findBulls(secret,guess)#bulls are the correct numbers in the correct posiiton
+    cows = findCows(secret,guess)#cows are the correct numbers in the >wrong< position
+    print (str(bulls) + "A" + str(cows) + "B")
+    guess = raw_input('Not yet! Enter your next guess')
+print "That's it, you guessed the correct number!"
