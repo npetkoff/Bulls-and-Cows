@@ -1,0 +1,43 @@
+from random import randint
+#This function creates the random number to be guessed in the game
+def generateSecretNumber():
+    r = randint(0,9999)
+    stringR = str(r)
+    l = len(stringR)
+    final = (4-l)*"0"+stringR
+    return final
+
+#This function locates the unique digits in the previous function
+def findUniqueDigits(s):
+    uniqueDigits=[]
+    for i in s:
+        if uniqueDigits.count(i) == 0:
+            uniqueDigits.append(i)
+    return uniqueDigits 
+
+#This function finds and returns the number of bulls in the user's guess    
+def findBulls(secret,guess):
+    bulls = 0
+    indexList=[0,1,2,3]
+    for i in indexList:
+        if guess[i] == secret[i]:
+            bulls += 1
+    return bulls  
+
+#This function finds and returns the number of cows in the user's guess
+def findCows(secret, guess):
+    bothBC = 0
+    secretUniDigits = findUniqueDigits(secret)
+    for i in secretUniDigits:
+        secretCount = secret.count(i)
+        guessCount = guess.count(i)
+        if secretCount <= guessCount:
+            minimum = secretCount
+        else:
+            minimum = guessCount
+        bothBC += minimum
+
+    bulls = findBulls(secret,guess) 
+    return bothBC - bulls
+            
+        
